@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will You Be My Girlfriend?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            boxShadow: {
+              soft: '0 20px 45px rgba(251, 113, 133, 0.25)',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background: linear-gradient(135deg, #fff1f2 0%, #fdf2f8 35%, #fce7f3 100%);
+      }
+
+      #buttonWrap {
+        position: relative;
+        height: 110px;
+      }
+
+      .choice-btn {
+        transition: all 0.25s ease;
+      }
+    </style>
+  </head>
+  <body class="relative min-h-screen overflow-hidden px-4 py-6">
+    <div class="pointer-events-none absolute left-4 top-10 text-3xl opacity-80">🌸</div>
+    <div class="pointer-events-none absolute right-6 top-20 text-4xl opacity-80">🌼</div>
+    <div class="pointer-events-none absolute bottom-20 left-8 text-3xl opacity-80">💐</div>
+    <div class="pointer-events-none absolute bottom-10 right-10 text-3xl opacity-80">🌷</div>
+
+    <main class="relative z-10 flex min-h-screen items-center justify-center">
+      <div class="w-full max-w-md">
+        <section class="rounded-[2rem] border border-white/60 bg-white/50 p-6 shadow-soft backdrop-blur-lg sm:p-8">
+          <div class="text-center">
+            <div class="mb-6 flex items-center justify-center gap-3 text-3xl">
+              <span>💖</span>
+              <span>🌸</span>
+              <span>💐</span>
+            </div>
+
+            <h1 class="text-3xl font-extrabold tracking-tight text-pink-600 sm:text-4xl">
+              Will you be my girlfriend?
+            </h1>
+
+            <div id="buttonWrap" class="mt-8">
+              <button
+                id="yesBtn"
+                type="button"
+                class="choice-btn absolute left-0 bottom-0 rounded-full bg-pink-500 px-6 py-3 text-base font-bold text-white shadow-lg shadow-pink-200 hover:bg-pink-600 active:scale-95"
+              >
+                YES
+              </button>
+
+              <button
+                id="noBtn"
+                type="button"
+                class="choice-btn absolute right-0 bottom-0 rounded-full border-2 border-pink-300 bg-white px-6 py-3 text-base font-bold text-pink-500 shadow-md hover:bg-pink-50 active:scale-95"
+              >
+                NO
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      const buttonWrap = document.getElementById('buttonWrap');
+
+      yesBtn.addEventListener('click', () => {
+        window.location.href = 'page2.html';
+      });
+
+      noBtn.addEventListener('click', () => {
+        const wrapRect = buttonWrap.getBoundingClientRect();
+        const noRect = noBtn.getBoundingClientRect();
+
+        const maxX = Math.max(0, wrapRect.width - noRect.width - 8);
+        const maxY = Math.max(0, wrapRect.height - noRect.height - 8);
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = `${randomX}px`;
+        noBtn.style.top = `${randomY}px`;
+        noBtn.style.right = 'auto';
+        noBtn.style.bottom = 'auto';
+      });
+    </script>
+  </body>
+</html>
